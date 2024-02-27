@@ -27,4 +27,4 @@ const areasSchema = new mongoose.Schema({
     chat: [chatSchema] 
 });
 
-module.exports = mongoose.model('areas', areasSchema);
+module.exports = mongoose.model('rooms', areasSchema);
