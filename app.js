@@ -14,10 +14,13 @@ const { createServer } = require('http');
 const server = createServer(app);
 const io = new Server(server);
 const Room = require('./DataModels/rooms');
-const PORT = 3000;
+const PORT = 5000;
 MdbConnect()
 
-app.use(cors());
+app.use(cors({
+  origin: 'http:10.2.106.243',
+  credentials: true, 
+}));
 app.use(express.json());
 
 app.use('/SignUp', signUpRouter);
