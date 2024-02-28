@@ -14,13 +14,10 @@ const { createServer } = require('http');
 const server = createServer(app);
 const io = new Server(server);
 const Room = require('./DataModels/rooms');
-const PORT = 5000;
+const PORT = 21098;
 MdbConnect()
-var corsOptions = {
-  origin: 'http://example.com',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-app.use(cors(corsOptions));
+
+app.use(cors());
 app.use(express.json());
 
 app.use('/SignUp', signUpRouter);
@@ -62,7 +59,7 @@ io.on('connection', (socket) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on Port: ${PORT}`);
 });
 
 module.exports = app;
