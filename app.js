@@ -14,7 +14,7 @@ const { createServer } = require('http');
 const server = createServer(app);
 const io = new Server(server);
 const Room = require('./DataModels/rooms');
-const PORT = 21098;
+const PORT = 3000;
 MdbConnect()
 
 app.use(cors());
