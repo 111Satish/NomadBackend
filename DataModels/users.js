@@ -1,11 +1,13 @@
-
-require('../config');
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    userName : String,
+    userName: String,
     userEmail: String,
-    userPassword : String,
+    userPassword: String,
+    city: String,
+    mobile: String,
+    profession: String,
+    dateOfBirth: Date,
     joinedRooms: [{ type: mongoose.Schema.Types.ObjectId, ref: 'rooms' }],
 });
 
