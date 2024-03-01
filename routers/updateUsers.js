@@ -7,7 +7,14 @@ router.post('/updateUser', async (req, res) => {
     const userData = req.body;
     console.log('Incoming joinedRooms:', userData.userInfo.joinedRooms);
 
-    const result = await User.findByIdAndUpdate(userData.userInfo._id, { joinedRooms: userData.userInfo.joinedRooms });
+    const result = await User.findByIdAndUpdate(userData.userInfo._id, { 
+      userName:userData.userInfo.userName,
+      city: userData.userInfo.city,
+      mobile: userData.userInfo.mobile,
+      profession: userData.userInfo.profession,
+      dateOfBirth: userData.userInfo.dateOfBirth,
+      joinedRooms: userData.userInfo.joinedRooms,
+    });
     console.log('Update Result:', result);
 
     res.json({ success: true, message: 'User updated successfully' });
