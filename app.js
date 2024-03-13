@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const MdbConnect = require('./config');
 const signUpRouter = require('./routers/signup');
@@ -14,11 +15,11 @@ const { createServer } = require('http');
 const server = createServer(app);
 const io = new Server(server);
 const Room = require('./DataModels/rooms');
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 MdbConnect()
 
 app.use(cors({
-  origin: 'http:10.2.106.243',
+  origin: 'http:0.0.0.0',
   credentials: true, 
 }));
 app.use(express.json());
