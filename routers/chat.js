@@ -1,12 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Room = require('../DataModels/rooms');
-const http = require('http');
 const socketIo = require('socket.io');
 
-const server = http.createServer();
-
-const io = socketIo(server);
+const io = socketIo();
 
 io.on('connection', (socket) => {
   console.log('A user connected to the socket.');
@@ -19,23 +16,22 @@ io.on('connection', (socket) => {
 router.post('/chat', async (req, res) => {
   try {
     const { roomId, userId, name, time, message } = req.body;
-    const room = await Room.findById(roomId);
 
-    if (!room) {
+    const updatedRoom = await Room.findByIdAndUpdate(
+      roomId,
+      {
+        $push: {
+          chat: { userId, name, time, message }
+        }
+      },
+      { new: true }
+    );
+
+    if (!updatedRoom) {
       return res.status(404).json({ success: false, message: 'Room not found' });
     }
 
-    const newChatMessage = {
-      userId,
-      name,
-      time,
-      message,
-    };
-
-    room.chat.push(newChatMessage);
-    await room.save();
-
-    io.to(roomId).emit('message', newChatMessage);
+    io.to(roomId).emit('message', { userId, name, time, message });
 
     res.json({ success: true, message: 'Chat message added successfully' });
   } catch (error) {
@@ -44,4 +40,4 @@ router.post('/chat', async (req, res) => {
   }
 });
 
-module.exports = { router, server };
+module.exports = { router, io };
