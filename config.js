@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 uri = `mongodb+srv://satishjnvr:Satish%40123@cluster0.plcwh0h.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+//uri = `mongodb://localhost:27017`
 const MdbConnect = ()=>{
     mongoose.connect(`${uri}/Nomad`)
     .then(()=>{

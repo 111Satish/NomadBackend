@@ -3,8 +3,9 @@ const router = express.Router();
 const RoomModel = require('../DataModels/rooms');
 
 router.post('/', async (req, res) => {
+    const {roomId} = req.body;
   try {
-    const rooms = await RoomModel.find({}, 'roomName imageUrl description rating');
+    const rooms = await RoomModel.findById({_id:roomId});
     //console.log(rooms);
     res.status(200).json(rooms);
   } catch (error) {
