@@ -11,6 +11,8 @@ const getChatRouter = require('./routers/getChats')
 const feedbackRouter = require('./routers/feedback');
 const reviewRouter = require('./routers/review');
 const roomDetailsRouter = require('./routers/roomDetails');
+const createTripRouter = require('./routers/trip');
+const expenseRouter = require('./routers/expense');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const app = express();
@@ -25,6 +27,7 @@ app.use(cors({
   origin: 'http:0.0.0.0',
   credentials: true, 
 }));
+
 app.use(express.json());
 
 app.use('/SignUp', signUpRouter);
@@ -37,6 +40,8 @@ app.use('/feedback', feedbackRouter);
 app.use(updateUsers);
 app.use('/review', reviewRouter);
 app.use('/roomDetails', roomDetailsRouter);
+app.use('/trip', createTripRouter);
+app.use('/expense', expenseRouter);
 
 app.get('/', (req, res) => {
   res.send('Server is running');

@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
     profession: String,
     dateOfBirth: Date,
     joinedRooms: [{ type: mongoose.Schema.Types.ObjectId, ref: 'rooms' }],
+    trips:[{type: mongoose.Schema.Types.ObjectId, ref: 'trips'}]
 });
 
 module.exports = mongoose.model('users', UserSchema);
