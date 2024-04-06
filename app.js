@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const express = require('express');
 const MdbConnect = require('./config');
 const signUpRouter = require('./routers/signup');
